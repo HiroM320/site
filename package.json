@@ -10,9 +10,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "2.7.2"
+    "@astrojs/react": "2.2.1",
+    "astro": "2.7.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@types/react": "18.2.14",
+    "@types/react-dom": "18.2.6",
     "vercel": "31.0.1"
   }
 }
