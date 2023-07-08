@@ -1,0 +1,7 @@
+{
+  "framework": "astro",
+  "devCommand": "astro dev --port $PORT",
+  "installCommand": "pnpm install",
+  "buildCommand": "astro build",
+  "outputDirectory": "dist"
+}
