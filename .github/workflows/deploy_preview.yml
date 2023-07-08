@@ -9,6 +9,9 @@ on: pull_request
 jobs:
   BuildAndDeploy:
     runs-on: ubuntu-latest
+    environment:
+      name: preview
+      url: ${{ steps.deployment.outputs.url }}
     steps:
       - uses: actions/checkout@v3
 
@@ -25,4 +28,5 @@ jobs:
         run: pnpm exec vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project Artifacts to Vercel
-        run: pnpm exec vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        id: deployment
+        run: echo "url=$(pnpm exec vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_OUTPUT
