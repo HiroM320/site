@@ -11,5 +11,8 @@
   },
   "dependencies": {
     "astro": "2.7.2"
+  },
+  "devDependencies": {
+    "vercel": "31.0.1"
   }
 }
