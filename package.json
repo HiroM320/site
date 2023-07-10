@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier -w . --cache --plugin-search-dir=.",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@astrojs/react": "2.2.1",
