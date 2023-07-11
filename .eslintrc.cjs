@@ -1,12 +1,19 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  // ...
+  root: true,
+  env: {
+    node: true,
+  },
   extends: [
-    // ...
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:astro/recommended",
     "prettier",
   ],
-  // ...
+  rules: {
+    "@typescript-eslint/no-unused-vars": "warn",
+  },
   overrides: [
     {
       // Define the configuration for `.astro` file.
@@ -24,6 +31,17 @@ module.exports = {
         // "astro/no-set-html-directive": "error"
       },
     },
-    // ...
+    {
+      files: ["*.jsx", "*.tsx"],
+      extends: ["plugin:react/recommended"],
+      rules: {
+        "react/react-in-jsx-scope": "off",
+      },
+      settings: {
+        react: {
+          version: "detect",
+        },
+      },
+    },
   ],
 };
