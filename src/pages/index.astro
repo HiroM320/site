@@ -3,12 +3,22 @@ import "@/styles/globals.css";
 
 import Layout from "@/layouts/Layout.astro";
 
-import { Button } from "@/components/ui/button";
+import SpinnableWatermelon from "@/components/SpinnableWatermelon.astro";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout>
   <main>
-    <h1>Welcome to <span class="text-gradient">Astro</span></h1>
-    <Button>Hello World</Button>
+    <div class="flex w-full items-center justify-center align-middle">
+      <div class="grid md:grid-cols-[1fr_auto] md:grid-rows-[1fr_auto]">
+        <div class="h-48 w-48">
+          <SpinnableWatermelon />
+        </div>
+        <div
+          class="px-4 py-4 text-center md:py-0 md:text-left md:flex md:items-center"
+        >
+          <h1 class="text-4xl font-bold">Hiro_m</h1>
+        </div>
+      </div>
+    </div>
   </main>
 </Layout>
