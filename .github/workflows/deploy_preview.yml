@@ -9,6 +9,7 @@ on: pull_request
 jobs:
   BuildAndDeploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     environment:
       name: preview
       url: ${{ steps.deployment.outputs.url }}
