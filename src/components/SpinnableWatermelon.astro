@@ -1,5 +1,15 @@
-<img
+---
+import { Picture } from "astro:assets";
+
+import watermelonWheelImage from "@/assets/watermelon-wheel.png";
+---
+
+<div
   class="h-full w-full rounded-full animate-spin [animation-play-state:paused] hover:[animation-play-state:running]"
-  src="/images/watermelon-wheel.png"
-  alt="watermelon wheel"
-/>
+>
+  <Picture
+    src={watermelonWheelImage}
+    formats={["webp"]}
+    alt="watermelon wheel"
+  />
+</div>
