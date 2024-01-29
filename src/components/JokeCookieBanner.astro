@@ -1,24 +1,33 @@
 ---
+const lang = Astro.preferredLocale;
+
 const text =
-  Astro.preferredLocale === "ja"
+  lang === "ja"
     ? {
-        title: "Cookie は好きですか？ - はい、サクサクで美味しいアレ 🍪 です。",
+        title: "Cookie は好きですか？ - もちろん、サクサクで美味しいアレです。",
         yes: "はい",
         no: "いいえ",
       }
     : {
-        title: "Do you like Cookie? - Yes, the squidgy chocolatey kind. 🍪",
+        title: "Do you like Cookie? - Yes, the squidgy chocolatey kind.",
         yes: "Yes",
         no: "No",
       };
 ---
 
-<div class="fixed bottom-28 left-0 drop-shadow">
-  <div class="bg-white p-1">
-    <p>{text.title}</p>
-    <div class="flex justify-around py-2">
-      <button class="border w-24">{text.yes}</button>
-      <button class="border w-24">{text.no}</button>
+<div
+  class="drop-shadow fixed bottom-28 left-0 -translate-x-[calc(100%-4rem)] hover:translate-x-0 duration-500"
+>
+  <div class="bg-white rounded-r-3xl py-8 px-1">
+    <div class="flex justify-between items-center gap-4">
+      <div>
+        <p>{text.title}</p>
+        <div class="flex justify-around pt-4">
+          <button class="border h-8 w-24">{text.yes}</button>
+          <button class="border h-8 w-24">{text.no}</button>
+        </div>
+      </div>
+      <div class="text-6xl">🍪</div>
     </div>
   </div>
 </div>
