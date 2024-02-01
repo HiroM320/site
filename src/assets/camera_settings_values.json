@@ -1,0 +1,47 @@
+{
+  "cameraShake": {
+    "type": "boolean"
+  },
+  "fov": {
+    "type": "number",
+    "min": 100,
+    "max": 110
+  },
+  "distance": {
+    "type": "number",
+    "min": 100,
+    "max": 400
+  },
+  "height": {
+    "type": "number",
+    "min": 40,
+    "max": 200
+  },
+  "angle": {
+    "type": "number",
+    "min": -15,
+    "max": 0
+  },
+  "stiffness": {
+    "type": "number",
+    "min": 0,
+    "max": 1
+  },
+  "swivelSpeed": {
+    "type": "number",
+    "min": 1,
+    "max": 10
+  },
+  "transitionSpeed": {
+    "type": "number",
+    "min": 1,
+    "max": 2
+  },
+  "ballCamera": {
+    "type": "literal",
+    "options": [
+      "Toggle",
+      "Hold"
+    ]
+  }
+}
