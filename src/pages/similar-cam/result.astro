@@ -1,0 +1,46 @@
+---
+import * as v from "valibot";
+
+import {
+  getProCameraSettings,
+  calcSimilarityBetweenProCameraSettings,
+  cameraSettingsSchema,
+} from "@/lib/similarCameraSettings";
+
+// クエリストリングからデータ取得
+const requestParams = Object.fromEntries(Astro.url.searchParams.entries());
+
+// リクエスト値を変換してバリデーション
+const validatedRequestCameraSettings = v.safeParse(cameraSettingsSchema, {
+  cameraShake: Number(requestParams.cameraShake ?? 0),
+  fov: Number(requestParams.fov),
+  height: Number(requestParams.height),
+  angle: Number(requestParams.angle),
+  distance: Number(requestParams.distance),
+  stiffness: Number(requestParams.stiffness),
+  swivelSpeed: Number(requestParams.swivelSpeed),
+  transitionSpeed: Number(requestParams.transitionSpeed),
+  ballCamera: Number(requestParams.ballCamera === "Toggle" ? 0 : 1),
+});
+
+if (!validatedRequestCameraSettings.success) {
+  return undefined;
+}
+
+const proCameraSettings = await getProCameraSettings();
+
+const similarities = calcSimilarityBetweenProCameraSettings(
+  validatedRequestCameraSettings.output,
+  proCameraSettings
+);
+
+const mostSimilarPros = similarities.at(0)?.[1];
+const mostDisimilarPros = similarities.at(-1)?.[1];
+---
+
+<p>
+  最も似ているのは: {mostSimilarPros ? mostSimilarPros.join(", ") : "なし"}
+</p>
+<p>
+  最も似てないのは: {mostDisimilarPros ? mostDisimilarPros.join(", ") : "なし"}
+</p>

@@ -1,0 +1,100 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+import cameraSettingsValues from "@/assets/camera_settings_values.json";
+
+import Result from "./result.astro";
+---
+
+<Layout>
+  <form method="get">
+    <div class="flex flex-col">
+      <label
+        >cameraShake
+        <input name="cameraShake" type="checkbox" /></label
+      >
+      <label
+        >fov
+        <input
+          name="fov"
+          type="number"
+          min={cameraSettingsValues.fov.min}
+          max={cameraSettingsValues.fov.max}
+          value={cameraSettingsValues.fov.min}
+        /></label
+      >
+      <label
+        >height
+        <input
+          name="height"
+          type="number"
+          min={cameraSettingsValues.height.min}
+          max={cameraSettingsValues.height.max}
+          value={cameraSettingsValues.height.min}
+        /></label
+      >
+      <label
+        >angle
+        <input
+          name="angle"
+          type="number"
+          min={cameraSettingsValues.angle.min}
+          max={cameraSettingsValues.angle.max}
+          value={cameraSettingsValues.angle.min}
+        /></label
+      >
+      <label
+        >distance
+        <input
+          name="distance"
+          type="number"
+          min={cameraSettingsValues.distance.min}
+          max={cameraSettingsValues.distance.max}
+          value={cameraSettingsValues.distance.min}
+        /></label
+      >
+      <label
+        >stiffness
+        <input
+          name="stiffness"
+          type="number"
+          min={cameraSettingsValues.stiffness.min}
+          max={cameraSettingsValues.stiffness.max}
+          value={cameraSettingsValues.stiffness.min}
+        /></label
+      >
+      <label
+        >swivelSpeed
+        <input
+          name="swivelSpeed"
+          type="number"
+          min={cameraSettingsValues.swivelSpeed.min}
+          max={cameraSettingsValues.swivelSpeed.max}
+          value={cameraSettingsValues.swivelSpeed.min}
+        /></label
+      >
+      <label
+        >transitionSpeed
+        <input
+          name="transitionSpeed"
+          type="number"
+          min={cameraSettingsValues.transitionSpeed.min}
+          max={cameraSettingsValues.transitionSpeed.max}
+          value={cameraSettingsValues.transitionSpeed.min}
+        /></label
+      >
+      <label
+        >ballCamera
+        <select name="ballCamera">
+          <option value="toggle">Toggle</option>
+          <option value="Hold">Hold</option>
+        </select>
+      </label>
+    </div>
+    <button type="submit">似たプロを見る</button>
+  </form>
+
+  <hr />
+
+  <Result />
+</Layout>
