@@ -114,7 +114,7 @@ export const calcSimilarityBetweenProCameraSettings = (
   return sortedSimilarityProEntries;
 };
 
-export const cameraSettingsSchema = v.object({
+const cameraSettingsSchema = v.object({
   cameraShake: v.optional(v.union([v.literal(0), v.literal(1)])),
   fov: v.number([
     v.minValue(cameraSettingsValues["fov"]["min"]),
@@ -149,6 +149,9 @@ export const cameraSettingsSchema = v.object({
 
 export type CameraSettings = v.Output<typeof cameraSettingsSchema>;
 
+export const safeParseCameraSettings = (cameraSettings: unknown) =>
+  v.safeParse(cameraSettingsSchema, cameraSettings);
+
 const normalizedCameraSettingsSchema = v.object({
   cameraShake: v.optional(v.union([v.literal(0), v.literal(1)])),
   fov: v.number([v.minValue(0), v.maxValue(1)]),
@@ -162,6 +165,10 @@ const normalizedCameraSettingsSchema = v.object({
 });
 
 type NormalizedCameraSettings = v.Output<typeof normalizedCameraSettingsSchema>;
+
+export const safeParseNormalizedCameraSettings = (
+  normalizedCameraSettings: unknown
+) => v.safeParse(normalizedCameraSettingsSchema, normalizedCameraSettings);
 
 type CalcNormalizedCameraSettings = (
   settings: CameraSettings
