@@ -10,16 +10,13 @@ import Result from "./result.astro";
   <form method="get">
     <div class="flex flex-col">
       <label
-        >cameraShake
-        <input name="cameraShake" type="checkbox" /></label
-      >
-      <label
         >fov
         <input
           name="fov"
           type="number"
           min={cameraSettingsValues.fov.min}
           max={cameraSettingsValues.fov.max}
+          step={cameraSettingsValues.fov.step}
           value={cameraSettingsValues.fov.min}
         /></label
       >
@@ -30,6 +27,7 @@ import Result from "./result.astro";
           type="number"
           min={cameraSettingsValues.height.min}
           max={cameraSettingsValues.height.max}
+          step={cameraSettingsValues.height.step}
           value={cameraSettingsValues.height.min}
         /></label
       >
@@ -40,6 +38,7 @@ import Result from "./result.astro";
           type="number"
           min={cameraSettingsValues.angle.min}
           max={cameraSettingsValues.angle.max}
+          step={cameraSettingsValues.angle.step}
           value={cameraSettingsValues.angle.min}
         /></label
       >
@@ -50,6 +49,7 @@ import Result from "./result.astro";
           type="number"
           min={cameraSettingsValues.distance.min}
           max={cameraSettingsValues.distance.max}
+          step={cameraSettingsValues.distance.step}
           value={cameraSettingsValues.distance.min}
         /></label
       >
@@ -60,6 +60,7 @@ import Result from "./result.astro";
           type="number"
           min={cameraSettingsValues.stiffness.min}
           max={cameraSettingsValues.stiffness.max}
+          step={cameraSettingsValues.stiffness.step}
           value={cameraSettingsValues.stiffness.min}
         /></label
       >
@@ -70,6 +71,7 @@ import Result from "./result.astro";
           type="number"
           min={cameraSettingsValues.swivelSpeed.min}
           max={cameraSettingsValues.swivelSpeed.max}
+          step={cameraSettingsValues.swivelSpeed.step}
           value={cameraSettingsValues.swivelSpeed.min}
         /></label
       >
@@ -80,16 +82,10 @@ import Result from "./result.astro";
           type="number"
           min={cameraSettingsValues.transitionSpeed.min}
           max={cameraSettingsValues.transitionSpeed.max}
+          step={cameraSettingsValues.transitionSpeed.step}
           value={cameraSettingsValues.transitionSpeed.min}
         /></label
       >
-      <label
-        >ballCamera
-        <select name="ballCamera">
-          <option value="toggle">Toggle</option>
-          <option value="Hold">Hold</option>
-        </select>
-      </label>
     </div>
     <button type="submit">似たプロを見る</button>
   </form>

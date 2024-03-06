@@ -12,7 +12,7 @@ const requestParams = Object.fromEntries(Astro.url.searchParams.entries());
 
 // リクエスト値を変換してバリデーション
 const validatedRequestCameraSettings = v.safeParse(cameraSettingsSchema, {
-  cameraShake: Number(requestParams.cameraShake ?? 0),
+  cameraShake: requestParams.cameraShake && Number(requestParams.cameraShake),
   fov: Number(requestParams.fov),
   height: Number(requestParams.height),
   angle: Number(requestParams.angle),
@@ -20,7 +20,8 @@ const validatedRequestCameraSettings = v.safeParse(cameraSettingsSchema, {
   stiffness: Number(requestParams.stiffness),
   swivelSpeed: Number(requestParams.swivelSpeed),
   transitionSpeed: Number(requestParams.transitionSpeed),
-  ballCamera: Number(requestParams.ballCamera === "Toggle" ? 0 : 1),
+  ballCamera:
+    requestParams.ballCamera && (requestParams.ballCamera === "Toggle" ? 0 : 1),
 });
 
 if (!validatedRequestCameraSettings.success) {

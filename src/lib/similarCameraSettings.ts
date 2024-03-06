@@ -97,8 +97,8 @@ export const calcSimilarityBetweenProCameraSettings = (
         normalizedProCameraSetting
       );
 
-      const similaritySum = Object.values(similarity).reduce(
-        (acc, cur) => acc + cur,
+      const similaritySum = Object.values(similarity).reduce<number>(
+        (acc, current = 0) => acc + current,
         0
       );
 
@@ -115,7 +115,7 @@ export const calcSimilarityBetweenProCameraSettings = (
 };
 
 export const cameraSettingsSchema = v.object({
-  cameraShake: v.union([v.literal(0), v.literal(1)]),
+  cameraShake: v.optional(v.union([v.literal(0), v.literal(1)])),
   fov: v.number([
     v.minValue(cameraSettingsValues["fov"]["min"]),
     v.maxValue(cameraSettingsValues["fov"]["max"]),
@@ -144,13 +144,13 @@ export const cameraSettingsSchema = v.object({
     v.minValue(cameraSettingsValues["transitionSpeed"]["min"]),
     v.maxValue(cameraSettingsValues["transitionSpeed"]["max"]),
   ]),
-  ballCamera: v.union([v.literal(0), v.literal(1)]),
+  ballCamera: v.optional(v.union([v.literal(0), v.literal(1)])),
 });
 
 export type CameraSettings = v.Output<typeof cameraSettingsSchema>;
 
 const normalizedCameraSettingsSchema = v.object({
-  cameraShake: v.union([v.literal(0), v.literal(1)]),
+  cameraShake: v.optional(v.union([v.literal(0), v.literal(1)])),
   fov: v.number([v.minValue(0), v.maxValue(1)]),
   height: v.number([v.minValue(0), v.maxValue(1)]),
   angle: v.number([v.minValue(0), v.maxValue(1)]),
@@ -158,7 +158,7 @@ const normalizedCameraSettingsSchema = v.object({
   stiffness: v.number([v.minValue(0), v.maxValue(1)]),
   swivelSpeed: v.number([v.minValue(0), v.maxValue(1)]),
   transitionSpeed: v.number([v.minValue(0), v.maxValue(1)]),
-  ballCamera: v.union([v.literal(0), v.literal(1)]),
+  ballCamera: v.optional(v.union([v.literal(0), v.literal(1)])),
 });
 
 type NormalizedCameraSettings = v.Output<typeof normalizedCameraSettingsSchema>;
@@ -229,7 +229,8 @@ type CalcSimilarityBetweenNormalizedCameraSettings = (
 
 const calcSimilarityBetweenNormalizedCameraSettings: CalcSimilarityBetweenNormalizedCameraSettings =
   (a, b) => {
-    const cameraShake = Math.abs(a.cameraShake - b.cameraShake);
+    const cameraShake =
+      a.cameraShake && b.cameraShake && Math.abs(a.cameraShake - b.cameraShake);
     const fov = Math.abs(a.fov - b.fov);
     const height = Math.abs(a.height - b.height);
     const angle = Math.abs(a.angle - b.angle);
@@ -237,7 +238,8 @@ const calcSimilarityBetweenNormalizedCameraSettings: CalcSimilarityBetweenNormal
     const stiffness = Math.abs(a.stiffness - b.stiffness);
     const swivelSpeed = Math.abs(a.swivelSpeed - b.swivelSpeed);
     const transitionSpeed = Math.abs(a.transitionSpeed - b.transitionSpeed);
-    const ballCamera = Math.abs(a.ballCamera - b.ballCamera);
+    const ballCamera =
+      a.ballCamera && b.ballCamera && Math.abs(a.ballCamera - b.ballCamera);
 
     return v.parse(normalizedCameraSettingsSchema, {
       cameraShake,
