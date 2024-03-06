@@ -54,7 +54,7 @@ const similarities = await (async () => {
           name="fov"
           {...cameraSettingsValues.fov}
           type="number"
-          value={cameraSettingsValues.fov.min}
+          value={requestCameraSettings?.fov ?? cameraSettingsValues.fov.min}
         /></label
       >
       <label
@@ -63,7 +63,8 @@ const similarities = await (async () => {
           name="height"
           {...cameraSettingsValues.height}
           type="number"
-          value={cameraSettingsValues.height.min}
+          value={requestCameraSettings?.height ??
+            cameraSettingsValues.height.min}
         /></label
       >
       <label
@@ -72,7 +73,7 @@ const similarities = await (async () => {
           name="angle"
           {...cameraSettingsValues.angle}
           type="number"
-          value={cameraSettingsValues.angle.min}
+          value={requestCameraSettings?.angle ?? cameraSettingsValues.angle.min}
         /></label
       >
       <label
@@ -81,7 +82,8 @@ const similarities = await (async () => {
           name="distance"
           {...cameraSettingsValues.distance}
           type="number"
-          value={cameraSettingsValues.distance.min}
+          value={requestCameraSettings?.distance ??
+            cameraSettingsValues.distance.min}
         /></label
       >
       <label
@@ -90,7 +92,8 @@ const similarities = await (async () => {
           name="stiffness"
           {...cameraSettingsValues.stiffness}
           type="number"
-          value={cameraSettingsValues.stiffness.min}
+          value={requestCameraSettings?.stiffness ??
+            cameraSettingsValues.stiffness.min}
         /></label
       >
       <label
@@ -99,7 +102,8 @@ const similarities = await (async () => {
           name="swivelSpeed"
           {...cameraSettingsValues.swivelSpeed}
           type="number"
-          value={cameraSettingsValues.swivelSpeed.min}
+          value={requestCameraSettings?.swivelSpeed ??
+            cameraSettingsValues.swivelSpeed.min}
         /></label
       >
       <label
@@ -108,7 +112,8 @@ const similarities = await (async () => {
           name="transitionSpeed"
           {...cameraSettingsValues.transitionSpeed}
           type="number"
-          value={cameraSettingsValues.transitionSpeed.min}
+          value={requestCameraSettings?.transitionSpeed ??
+            cameraSettingsValues.transitionSpeed.min}
         /></label
       >
     </div>
