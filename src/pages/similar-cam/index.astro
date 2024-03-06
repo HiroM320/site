@@ -3,7 +3,46 @@ import Layout from "@/layouts/Layout.astro";
 
 import cameraSettingsValues from "@/assets/camera_settings_values.json";
 
+import {
+  getProCameraSettings,
+  calcSimilarityBetweenProCameraSettings,
+  safeParseCameraSettings,
+} from "@/lib/similarCameraSettings";
+
 import Result from "./result.astro";
+
+// クエリストリングからデータ取得
+const requestParams = Object.fromEntries(Astro.url.searchParams.entries());
+
+// リクエスト値を変換してバリデーション
+const validatedRequestCameraSettings = safeParseCameraSettings({
+  cameraShake: requestParams.cameraShake && Number(requestParams.cameraShake),
+  fov: Number(requestParams.fov),
+  height: Number(requestParams.height),
+  angle: Number(requestParams.angle),
+  distance: Number(requestParams.distance),
+  stiffness: Number(requestParams.stiffness),
+  swivelSpeed: Number(requestParams.swivelSpeed),
+  transitionSpeed: Number(requestParams.transitionSpeed),
+  ballCamera:
+    requestParams.ballCamera && (requestParams.ballCamera === "Toggle" ? 0 : 1),
+});
+
+const requestCameraSettings = validatedRequestCameraSettings.success
+  ? validatedRequestCameraSettings.output
+  : undefined;
+
+const similarities = await (async () => {
+  if (!requestCameraSettings) {
+    return undefined;
+  }
+  const proCameraSettings = await getProCameraSettings();
+
+  return calcSimilarityBetweenProCameraSettings(
+    requestCameraSettings,
+    proCameraSettings
+  );
+})();
 ---
 
 <Layout>
@@ -78,5 +117,5 @@ import Result from "./result.astro";
 
   <hr />
 
-  <Result />
+  {similarities && <Result similarities={similarities} />}
 </Layout>
