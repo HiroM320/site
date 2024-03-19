@@ -1,7 +1,7 @@
 import * as v from "valibot";
 import { parse } from "node-html-parser";
 
-import cameraSettingsValues from "@/assets/camera_settings_values.json";
+import cameraSettingsValues from "./camera_settings_values.json";
 
 const rawProCameraSettingsJsonSchema = v.object({
   parse: v.object({

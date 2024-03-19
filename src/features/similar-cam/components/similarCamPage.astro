@@ -1,0 +1,126 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+import cameraSettingsValues from "../lib/camera_settings_values.json";
+
+import {
+  getProCameraSettings,
+  calcSimilarityBetweenProCameraSettings,
+  safeParseCameraSettings,
+} from "../lib/similarCameraSettings";
+
+import Result from "./result.astro";
+
+// クエリストリングからデータ取得
+const requestParams = Object.fromEntries(Astro.url.searchParams.entries());
+
+// リクエスト値を変換してバリデーション
+const validatedRequestCameraSettings = safeParseCameraSettings({
+  cameraShake: requestParams.cameraShake && Number(requestParams.cameraShake),
+  fov: Number(requestParams.fov),
+  height: Number(requestParams.height),
+  angle: Number(requestParams.angle),
+  distance: Number(requestParams.distance),
+  stiffness: Number(requestParams.stiffness),
+  swivelSpeed: Number(requestParams.swivelSpeed),
+  transitionSpeed: Number(requestParams.transitionSpeed),
+  ballCamera:
+    requestParams.ballCamera && (requestParams.ballCamera === "Toggle" ? 0 : 1),
+});
+
+const requestCameraSettings = validatedRequestCameraSettings.success
+  ? validatedRequestCameraSettings.output
+  : undefined;
+
+const similarities = await (async () => {
+  if (!requestCameraSettings) {
+    return undefined;
+  }
+  const proCameraSettings = await getProCameraSettings();
+
+  return calcSimilarityBetweenProCameraSettings(
+    requestCameraSettings,
+    proCameraSettings
+  );
+})();
+---
+
+<Layout>
+  <form method="get">
+    <div class="flex flex-col">
+      <label
+        >fov
+        <input
+          name="fov"
+          {...cameraSettingsValues.fov}
+          type="number"
+          value={requestCameraSettings?.fov ?? cameraSettingsValues.fov.min}
+        /></label
+      >
+      <label
+        >height
+        <input
+          name="height"
+          {...cameraSettingsValues.height}
+          type="number"
+          value={requestCameraSettings?.height ??
+            cameraSettingsValues.height.min}
+        /></label
+      >
+      <label
+        >angle
+        <input
+          name="angle"
+          {...cameraSettingsValues.angle}
+          type="number"
+          value={requestCameraSettings?.angle ?? cameraSettingsValues.angle.min}
+        /></label
+      >
+      <label
+        >distance
+        <input
+          name="distance"
+          {...cameraSettingsValues.distance}
+          type="number"
+          value={requestCameraSettings?.distance ??
+            cameraSettingsValues.distance.min}
+        /></label
+      >
+      <label
+        >stiffness
+        <input
+          name="stiffness"
+          {...cameraSettingsValues.stiffness}
+          type="number"
+          value={requestCameraSettings?.stiffness ??
+            cameraSettingsValues.stiffness.min}
+        /></label
+      >
+      <label
+        >swivelSpeed
+        <input
+          name="swivelSpeed"
+          {...cameraSettingsValues.swivelSpeed}
+          type="number"
+          value={requestCameraSettings?.swivelSpeed ??
+            cameraSettingsValues.swivelSpeed.min}
+        /></label
+      >
+      <label
+        >transitionSpeed
+        <input
+          name="transitionSpeed"
+          {...cameraSettingsValues.transitionSpeed}
+          type="number"
+          value={requestCameraSettings?.transitionSpeed ??
+            cameraSettingsValues.transitionSpeed.min}
+        /></label
+      >
+    </div>
+    <button type="submit">似たプロを見る</button>
+  </form>
+
+  <hr />
+
+  {similarities && <Result similarities={similarities} />}
+</Layout>
