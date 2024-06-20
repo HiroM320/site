@@ -1,7 +1,4 @@
 {
-  "cameraShake": {
-    "type": "boolean"
-  },
   "fov": {
     "type": "number",
     "min": 60,
@@ -43,12 +40,5 @@
     "min": 1,
     "max": 2,
     "step": 0.1
-  },
-  "ballCamera": {
-    "type": "literal",
-    "options": [
-      "Toggle",
-      "Hold"
-    ]
   }
 }
