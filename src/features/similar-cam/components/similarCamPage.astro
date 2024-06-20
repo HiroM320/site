@@ -46,6 +46,33 @@ const similarities = await (async () => {
 ---
 
 <Layout>
+  <div class="rounded-xl bg-white text-black drop-shadow p-4">
+    <div class="grid grid-cols-3 gap-y-4 pr-[30%]">
+      {
+        Object.entries(cameraSettingsValues).map(([key, value]) => (
+            <label class="text-right mr-4" for={key}>
+              {key}
+            </label>
+            <div>==========================</div>
+            <input
+              class="pl-2"
+              id={key}
+              name={key}
+              {...value}
+              type="number"
+              value={
+                (requestCameraSettings &&
+                  requestCameraSettings[
+                    key as keyof typeof requestCameraSettings
+                  ]) ??
+                value.min
+              }
+            />
+        ))
+      }
+    </div>
+  </div>
+
   <form method="get">
     <div class="flex flex-col">
       <label
