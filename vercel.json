@@ -1,4 +1,5 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "astro",
   "devCommand": "astro dev --port $PORT",
   "installCommand": "pnpm install",
